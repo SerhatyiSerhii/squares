@@ -1,23 +1,25 @@
 import { createContext, useState } from 'react';
 import './App.scss';
-import BoardComponent from './components/BoardComponent/Board';
-import HoveredInfoComponent from './components/HoveredInfoComponent/HoveredInfo';
-import ModeSelectorComponent from './components/ModeSelectorComponent/ModeSelector';
+import Board from './components/Board/Board';
+import HoveredInfo from './components/HoveredInfo/HoveredInfo';
+import ModeSelector from './components/ModeSelector/ModeSelector';
 
-export const squareContext = createContext(null);
+export const SquareContext = createContext(null);
 
 function App() {
   const [started, setStarted] = useState(false);
-  const [squareConut, setSquareConut] = useState(0);
+  const [squareCount, setSquareCount] = useState(0);
   const [highlightedSqrs, setHighlightedSqrs] = useState([]);
 
   const showBoard = (showBoard) => {
-    setStarted(showBoard);
-    setHighlightedSqrs([]);
+    if (!started) {
+      setStarted(showBoard);
+      setHighlightedSqrs([]);
+    }
   }
 
   const saveMode = (mode) => {
-    setSquareConut(mode);
+    setSquareCount(mode);
   }
 
   const toggleHovered = (row, column, filled, id) => {
@@ -35,12 +37,12 @@ function App() {
   return (
     <div className='container'>
       <div className='wrapper'>
-        <squareContext.Provider value={toggleHovered}>
-          <ModeSelectorComponent displayBoard={showBoard} saveMode={saveMode} />
-          <BoardComponent started={started} pickedMode={squareConut} />
-        </squareContext.Provider>
+        <SquareContext.Provider value={toggleHovered}>
+          <ModeSelector displayBoard={showBoard} saveMode={saveMode} />
+          <Board started={started} pickedMode={squareCount} />
+        </SquareContext.Provider>
       </div>
-      <HoveredInfoComponent squares={highlightedSqrs} />
+      <HoveredInfo squares={highlightedSqrs} />
     </div>
   );
 }

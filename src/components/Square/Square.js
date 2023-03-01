@@ -1,21 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import { squareContext } from '../../App';
+import { SquareContext } from '../../App';
 
-function SquareComponent({ row, column, started, id }) {
+function Square({ row, column, started, id }) {
     const [filled, setFilled] = useState(false);
 
-    const context = useContext(squareContext);
+    const toggleSquare = useContext(SquareContext);
 
     useEffect(() => {
         setFilled(false);
     }, [started]);
 
-    useEffect(() => {
-        context(row, column, filled, id);
-    }, [filled]);
-
     const fillSquare = () => {
-        setFilled(!filled);        
+        toggleSquare(row, column, !filled, id);
+
+        setFilled(!filled);
     }
 
     return (
@@ -23,4 +21,4 @@ function SquareComponent({ row, column, started, id }) {
     );
 }
 
-export default SquareComponent;
+export default Square;
