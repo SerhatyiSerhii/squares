@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
-function ModeSelectorComponent({ displayBoard, saveMode }) {
-    const baseURL = 'http://demo7919674.mockable.io/';
+const baseURL = 'http://demo7919674.mockable.io/';
+const headers = { 'Content-Type': 'application/json' };
+
+function ModeSelector({ displayBoard, saveMode }) {
 
     const [modes, setModes] = useState([]);
 
     useEffect(() => {
-        const headers = { 'Content-Type': 'application/json' };
         fetch(baseURL, headers)
             .then(response => response.json())
             .then(data => setModes(data))
@@ -39,4 +40,4 @@ function ModeSelectorComponent({ displayBoard, saveMode }) {
     );
 }
 
-export default ModeSelectorComponent;
+export default ModeSelector;

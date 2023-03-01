@@ -1,4 +1,4 @@
-function HoveredInfoComponent({ squares }) {
+function HoveredInfo({ squares }) {
     return (
         <div className="hover-squares">
             Hover squares
@@ -11,4 +11,4 @@ function HoveredInfoComponent({ squares }) {
     );
 }
 
-export default HoveredInfoComponent;
+export default HoveredInfo;
